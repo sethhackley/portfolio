@@ -178,3 +178,78 @@ section h2 {
     border: none;
     overflow: hidden;          /* another attempt to hide scrollbar */
 }
+/* Project write-up pages */
+.card-link {
+    color: #c8a8e8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.card-link:hover {
+    color: #e0c8ff;
+    text-decoration: underline;
+}
+
+.project-meta {
+    color: #b090d0;
+    font-size: 0.95em;
+    margin-top: -5px;
+}
+
+section p, .findings li {
+    line-height: 1.6;
+    color: #e0d0f0;
+}
+
+h3.sub {
+    color: #d8b8f8;
+    margin: 28px 0 10px;
+}
+
+.example {
+    background-color: rgba(40, 20, 50, 0.6);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 10px 0;
+    line-height: 1.6;
+    color: #e0d0f0;
+}
+
+.example.bad { border-left: 3px solid #e07a8e; }
+.example.good { border-left: 3px solid #7ad0a0; }
+
+.example .label {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #b090d0;
+    margin-bottom: 4px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table.results {
+    width: 100%;
+    border-collapse: collapse;
+    color: #e0d0f0;
+}
+
+table.results th, table.results td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(155, 89, 182, 0.4);
+}
+
+table.results th {
+    color: #c8a8e8;
+}
+
+@media (max-width: 600px) {
+    .content-panel { margin: 20px 12px; padding: 22px 18px; }
+    nav ul { flex-wrap: wrap; gap: 10px; }
+    nav a { padding: 10px 20px; }
+}

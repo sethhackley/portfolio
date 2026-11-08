@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seth Hackley - Job Agent Project</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="content-panel">
+        <h1>Seth Hackley</h1>
+        <p class="tagline">QA Professional | AI-Assisted Testing | Software Reverse Engineering</p>
+    <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    </nav>
+
+        <section id="job-agent">
+            <h2>Job Agent: Local AI Job Application Helper</h2>
+            <p class="project-meta">Python &middot; Ollama (local LLMs) &middot; SQLite &middot; pytest &middot; November 2026 &middot; <a class="card-link" href="https://github.com/sethhackley/job-agent">Source on GitHub</a></p>
+
+            <p>AI-written cover letters have a quality problem: they quietly invent experience by borrowing duties from the job description and attributing them to the applicant. I built this tool to treat that as a QA problem. It generates a letter, tests every claim in it against a source of truth (the resume), and removes whatever fails.</p>
+            <p>Everything runs on my own computer. The language models run locally on my GPU through Ollama, so no resume or job data is sent to a cloud AI service.</p>
+        </section>
+
+        <section>
+            <h2>What it does</h2>
+            <div class="project-card">
+                <h3>Resume parsing</h3>
+                <p>Reads PDF, DOCX or text resumes into a structured profile, cached until the file changes.</p>
+            </div>
+            <div class="project-card">
+                <h3>Job ranking</h3>
+                <p>Ranks saved job postings by how well they match the resume and the search ("QA tester" expands to related titles), flags roles above the applicant's experience level, and gives the best matches a 1&ndash;10 fit score listing matched requirements and gaps.</p>
+            </div>
+            <div class="project-card">
+                <h3>Fact-checked cover letters</h3>
+                <p>Drafts a letter, checks each sentence about the applicant against the resume, revises, and deletes sentences that still fail. Banned clich&eacute;s and length are enforced in plain code rather than trusted to the model.</p>
+            </div>
+            <div class="project-card">
+                <h3>Application tracker</h3>
+                <p>A local SQLite log of every job scored or applied to, with fit, saved letter, status, dates and notes. It catches duplicate postings so the same job isn't applied to twice.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Testing it like a QA project</h2>
+            <p>I tested the tool against my own resume and real job postings, and checked its output claim by claim. Those checks drove most of the design.</p>
+
+            <h3 class="sub">Defect found: invented experience</h3>
+            <p>On a sample mobile QA posting, the first draft claimed experience that came from the job description, not the resume:</p>
+            <div class="example bad"><span class="label">Draft</span>&ldquo;I also maintained test plans and collaborated with developers to reproduce issues&hellip;&rdquo;</div>
+            <div class="example good"><span class="label">Result</span>The fact-check flagged the sentence as unsupported and the revision removed it. On a real Windows endpoint QA posting, it likewise removed an unsupported claim of &ldquo;experience in Windows environments, endpoint management.&rdquo;</div>
+
+            <h3 class="sub">Ranking results</h3>
+            <div class="table-wrap">
+            <table class="results">
+                <thead><tr><th>Posting</th><th>Fit</th><th>Flags</th></tr></thead>
+                <tbody>
+                    <tr><td>Mobile QA Engineer (sample)</td><td>9/10</td><td>none</td></tr>
+                    <tr><td>Windows endpoint QA Engineer (real posting)</td><td>6/10</td><td>none; gaps: Intune, endpoint management</td></tr>
+                    <tr><td>Senior Account Executive, Sales (control)</td><td>2/10</td><td>above experience level; outside search</td></tr>
+                </tbody>
+            </table>
+            </div>
+
+            <h3 class="sub">Fixes that came from testing</h3>
+            <ul class="findings">
+                <li><strong>Revise-then-delete loop:</strong> sentences that still fail after two revisions are deleted instead of sent.</li>
+                <li><strong>Code-enforced style rules:</strong> the model kept using banned openers like &ldquo;I am writing to express my interest,&rdquo; so they are now checked in code.</li>
+                <li><strong>Seniority cap:</strong> the model suggested Senior and Architect titles for four years of experience, so levels are now capped in code.</li>
+                <li><strong>Confirmed facts:</strong> real experience missing from the resume (like reproducing bugs) can be recorded, tied to a specific job, so the checker doesn't strip true claims.</li>
+                <li><strong>Automated tests:</strong> 47 pytest tests cover these rules using a fake model, and I confirmed they catch bugs by breaking the code on purpose.</li>
+            </ul>
+
+            <h3 class="sub">Known limitation</h3>
+            <p>The fact-check still misses claims that blend two true facts into a false one, such as tying a tool listed only under Skills to a specific employer. A model more than twice the size caught no more of these and took over six minutes per check, so the planned fix is structural: split the resume into sections in code and check each claim against only its matching section.</p>
+        </section>
+
+        <section>
+            <h2>How it was built</h2>
+            <p>I built this with Claude Code as an AI pair programmer. I set the requirements (local-only, honest letters, review before sending), tested every stage against real data, and verified the output against my resume line by line. When a test failed, I fed that back as the next fix.</p>
+            <p><a class="card-link" href="https://github.com/sethhackley/job-agent">View the source, tests and commit history on GitHub &rarr;</a></p>
+        </section>
+    </div>
+</body>
+</html>
