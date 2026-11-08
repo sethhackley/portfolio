@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seth Hackley - Job Agent Demo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="content-panel">
+        <h1>Seth Hackley</h1>
+        <p class="tagline">QA Professional | AI-Assisted Testing | Software Reverse Engineering</p>
+    <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    </nav>
+
+        <section>
+            <h2>Job Agent: recorded demo</h2>
+            <p class="project-meta">One real run, recorded 2026-11-08 on my RTX 5080 with <code>qwen3:14b</code>. Nothing below is edited except the highlights. &middot; <a class="card-link" href="job-agent.html">Project write-up</a> &middot; <a class="card-link" href="https://github.com/sethhackley/job-agent">Source</a></p>
+            <p>This walks through one complete run of the tool: my resume plus a sample job posting in, a fit score and a fact-checked cover letter out. Then it shows my own line-by-line review of the output, including what the automated fact-check missed.</p>
+            <div class="legend">
+                <span><mark class="hl-caught">caught</mark> flagged correctly</span>
+                <span><mark class="hl-false">false alarm</mark> flagged but true</span>
+                <span><mark class="hl-missed">missed</mark> unsupported, not flagged</span>
+                <span><mark class="hl-warn">weak</mark> misleading or vague</span>
+            </div>
+        </section>
+
+        <section>
+            <h2><span class="step">1</span>Input: the job posting</h2>
+            <p>A sample posting I wrote for testing (not a real company). The resume is my real one, available on the <a class="card-link" href="resume.html">Resume</a> page.</p>
+            <div class="letter-box job">QA Engineer, Mobile Apps — Example Corp (San Diego, hybrid)
+We&#x27;re looking for a QA Engineer to test our Android and iOS apps.
+Responsibilities: write and execute test cases; perform functional, regression and boundary testing; file clear bug reports in JIRA; maintain test plans in TestRail; work with developers to reproduce issues.
+Requirements: 2+ years of software QA experience; mobile app testing; JIRA and TestRail; strong written communication. Nice to have: ISTQB certification, Python or Appium automation, Linux.</div>
+        </section>
+
+        <section>
+            <h2><span class="step">2</span>Fit score: 9/10 <span class="timing">7.9 s</span></h2>
+            <div class="project-card"><h3>Matches</h3><ul class="findings"><li>2+ years of software QA experience: Seth has over four years of cumulative QA experience across Qualcomm Technologies and Stanford University.</li><li>Mobile app testing: Seth has hands-on experience in mobile device app testing and has worked on Android app testing, including reverse engineering and compatibility patching.</li><li>JIRA and TestRail: Seth has experience using JIRA and TestRail, as evidenced by his work at Qualcomm Technologies and Stanford University, where he created test cases and maintained documentation.</li><li>Strong written communication: Seth has experience in technical documentation, defect reporting, and creating test plans and project requirement templates, which demonstrate strong written communication skills.</li></ul></div>
+            <div class="project-card"><h3>Gaps</h3><ul class="findings"><li>The job description specifies &#x27;2+ years of software QA experience,&#x27; and while Seth has over four years of experience, it&#x27;s not explicitly stated in his resume that all of this experience is in QA roles. Some of his experience is listed as &#x27;Administrative Assistant&#x27; and &#x27;Social Media and Marketing Professional,&#x27; which may not count toward QA experience.</li><li>Python or Appium automation: Seth does not mention experience with Python or Appium automation, which are listed as &#x27;nice to have&#x27; in the job description.</li></ul></div>
+            <p class="note"><strong>My review:</strong> the score is reasonable, but the third match says JIRA and TestRail are evidenced by my work at Qualcomm and Stanford. They're only in my skills list. The first gap is also off: the resume does describe four years of QA work. Same blind spot as the fact-check below.</p>
+        </section>
+
+        <section>
+            <h2><span class="step">3</span>First draft and the fact-check</h2>
+            <p>The model drafts a letter, then a second pass checks every sentence about me against the resume. It flagged two phrases:</p>
+            <div class="letter-box">Dear Hiring Team at Example Corp,
+
+I am applying for the QA Engineer, Mobile Apps position at Example Corp. With over four years of cumulative QA experience across Qualcomm Technologies and Stanford University, I have developed a strong foundation in manual and automated testing, test-case generation, defect reporting, and technical documentation. My hands-on experience with AI tools such as Gemini, Claude, and GitHub Copilot has further enhanced my ability to streamline workflows and improve testing efficiency.
+
+In my role as a Testing Technician at Qualcomm Technologies, I wrote and executed test cases for software under development, <mark class="hl-missed" title="Not flagged: missed. JIRA is only in the skills list, not tied to Qualcomm.">filed clear bug reports in JIRA</mark>, and <mark class="hl-caught" title="Flagged by the fact-check: correct. Not on the resume.">maintained test plans in TestRail</mark>. I consistently documented detailed steps to reproduce bugs, ensuring that development teams had the necessary information to resolve issues efficiently. This experience aligns closely with the responsibilities outlined in the job description, particularly in writing test cases, performing functional and regression testing, and filing bug reports in JIRA.
+
+My most recent personal project involved reverse engineering and patching an Android APK to ensure compatibility with modern Android versions. This work required modifying AndroidManifest.xml, troubleshooting SELinux context restrictions, and integrating AI tools for code analysis and modification planning. These skills directly support the need for mobile app testing and compatibility verification, which are key aspects of the QA Engineer role at Example Corp.
+
+I am confident that my background, combined with my ISTQB certification <mark class="hl-false" title="Flagged by the fact-check: false alarm. Both are in the resume&#x27;s skills list.">and experience with TestRail and JIRA</mark>, make me a strong candidate for this position. I would welcome the opportunity to contribute to your team and help ensure the quality and reliability of your mobile applications.
+
+Sincerely,
+Seth Hackley</div>
+            <p class="note">One catch was right: &ldquo;maintained test plans in TestRail&rdquo; came from the job description, not my resume. One was a false alarm: TestRail and JIRA <em>are</em> in my skills list. And it missed &ldquo;bug reports in JIRA&rdquo; at Qualcomm.</p>
+        </section>
+
+        <section>
+            <h2><span class="step">4</span>Revised letter <span class="timing">35.6 s total, 1 revision, 269 words</span></h2>
+            <p>The tool rewrote the flagged phrases and checked again; the second check passed. Banned phrases and length are enforced in plain code, and this version passed both.</p>
+            <div class="letter-box">Dear Hiring Team at Example Corp,
+
+I am applying for the QA Engineer, Mobile Apps position at Example Corp. With over four years of cumulative QA experience across Qualcomm Technologies and Stanford University, I have developed a strong foundation in manual and automated testing, test-case generation, defect reporting, and technical documentation. My hands-on experience with AI tools such as Gemini, Claude, and GitHub Copilot has further enhanced my ability to <mark class="hl-warn" title="Vague claim that can&#x27;t be verified.">streamline workflows and improve testing efficiency</mark>.
+
+In my role as a Testing Technician at Qualcomm Technologies, I wrote and executed test cases for software under development, <mark class="hl-missed" title="Missed by the fact-check: JIRA is only in the skills list.">filed clear bug reports in JIRA</mark>, and created product documentation for distribution to clients. I consistently documented detailed steps to reproduce bugs, ensuring that development teams had the necessary information to resolve issues efficiently. This experience aligns closely with the responsibilities outlined in the job description, particularly in writing test cases, <mark class="hl-warn" title="Implies this was done at Qualcomm; it&#x27;s only in the skills list.">performing functional and regression testing</mark>, and filing bug reports in JIRA.
+
+My most recent personal project involved reverse engineering and patching an Android APK to ensure compatibility with modern Android versions. This work required modifying AndroidManifest.xml, troubleshooting SELinux context restrictions, and integrating AI tools for code analysis and modification planning. These skills directly support the need for mobile app testing and compatibility verification, which are key aspects of the QA Engineer role at Example Corp.
+
+I am confident that my background, combined with my ISTQB certification and experience with JIRA, make me a strong candidate for this position. I would welcome the opportunity to contribute to your team and help ensure the quality and reliability of your mobile applications.
+
+Sincerely,
+Seth Hackley</div>
+        </section>
+
+        <section>
+            <h2><span class="step">5</span>My manual review</h2>
+            <p>I checked each claim in the final letter against the matching section of my resume.</p>
+            <div class="table-wrap">
+            <table class="results review">
+                <thead><tr><th></th><th>Claim</th><th>Evidence</th></tr></thead>
+                <tbody>
+<tr><td class="st st-ok">&#10003;</td><td>Over four years of QA experience across Qualcomm and Stanford</td><td>Resume summary</td></tr>
+<tr><td class="st st-ok">&#10003;</td><td>Wrote and executed test cases at Qualcomm</td><td>Qualcomm section</td></tr>
+<tr><td class="st st-ok">&#10003;</td><td>Filed bug reports and created product documentation at Qualcomm</td><td>Qualcomm section</td></tr>
+<tr><td class="st st-ok">&#10003;</td><td>Documented steps to reproduce bugs</td><td>Confirmed fact (true, added because the resume omits it)</td></tr>
+<tr><td class="st st-miss">&#10007;</td><td>Filed bug reports <em>in JIRA</em> at Qualcomm</td><td>JIRA appears only in the skills list. Missed by the fact-check.</td></tr>
+<tr><td class="st st-warn">!</td><td>Functional and regression testing, implied at Qualcomm</td><td>Only in the skills list, not tied to any job</td></tr>
+<tr><td class="st st-warn">!</td><td>AI tools “streamline workflows and improve testing efficiency”</td><td>Vague; can&#x27;t be verified either way</td></tr>
+<tr><td class="st st-ok">&#10003;</td><td>Android APK compatibility work, AndroidManifest.xml, SELinux troubleshooting</td><td>Personal project section</td></tr>
+<tr><td class="st st-ok">&#10003;</td><td>ISTQB certification, experience with JIRA</td><td>Certifications and skills list</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>What this run shows</h2>
+            <ul class="findings">
+                <li><strong>The fact-check helps but isn't enough on its own.</strong> On this posting I recorded 5 runs; the check flagged something in 1 of them. In the two runs I reviewed line by line, the final letter still contained at least one unsupported claim.</li>
+                <li><strong>Its blind spot is consistent:</strong> a tool listed under Skills gets attached to a specific job. A bigger model didn't fix it, so the planned fix is structural: split the resume into sections in code and check each claim against only its matching section.</li>
+                <li><strong>That's why the workflow ends with human review.</strong> The tool drafts and screens; I verify before anything is sent.</li>
+            </ul>
+            <p>A live version, where approved visitors can run the tool on my PC through a secured Cloudflare Tunnel, is planned. <a class="card-link" href="https://github.com/sethhackley/job-agent/blob/main/docs/live-demo-plan.md">Read the plan &rarr;</a></p>
+        </section>
+    </div>
+</body>
+</html>
